@@ -1,0 +1,5 @@
+{
+  "_comment": "このファイルを .clasp.json にコピーし、scriptId を自分の GAS プロジェクトIDに変更してください。rootDir は gas/ を指します。",
+  "scriptId": "ここにGASのスクリプトIDを入れる",
+  "rootDir": "gas"
+}

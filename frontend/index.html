@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>案件別工数管理システム（HYPHEN）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/tokens.css" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+</head>
+<body>
+  <!-- アプリ全体シェル -->
+  <div id="app">
+    <!-- ヘッダ -->
+    <header class="app-header">
+      <button id="menu-toggle" class="icon-btn" aria-label="メニュー">☰</button>
+      <div class="brand">
+        <span class="brand-logo" aria-hidden="true">◆</span>
+        <span class="brand-name" id="app-name">案件別工数管理システム</span>
+      </div>
+      <div class="header-right">
+        <span id="header-date" class="header-date"></span>
+      </div>
+    </header>
+
+    <!-- サイドバー -->
+    <aside class="app-sidebar" id="sidebar">
+      <nav id="nav"></nav>
+      <div class="sidebar-footer">
+        <div id="company-name">HYPHEN Inc.</div>
+        <div class="version">サンプル v1.0</div>
+      </div>
+    </aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- メインエリア -->
+    <main class="app-main">
+      <div class="page-header">
+        <h1 id="page-title">ダッシュボード</h1>
+        <div id="page-actions" class="page-actions"></div>
+      </div>
+      <div id="page-content" class="page-content"></div>
+    </main>
+  </div>
+
+  <!-- モーダル/トースト マウント先 -->
+  <div id="modal-root"></div>
+  <div id="toast-root" class="toast-root"></div>
+
+  <!-- スプラッシュ -->
+  <div id="splash" class="splash"><div class="spinner"></div><p>読み込み中...</p></div>
+
+  <!-- ライブラリ -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- アプリ（依存順に読み込み） -->
+  <script src="./js/config.js"></script>
+  <script src="./js/utils/format.js"></script>
+  <script src="./js/utils/validate.js"></script>
+  <script src="./js/utils/timer.js"></script>
+  <script src="./js/api.js"></script>
+  <script src="./js/store.js"></script>
+  <script src="./js/components/toast.js"></script>
+  <script src="./js/components/modal.js"></script>
+  <script src="./js/components/form.js"></script>
+  <script src="./js/components/table.js"></script>
+  <script src="./js/components/chart.js"></script>
+  <script src="./js/components/crud.js"></script>
+  <script src="./js/pages/dashboard.js"></script>
+  <script src="./js/pages/time.js"></script>
+  <script src="./js/pages/projects.js"></script>
+  <script src="./js/pages/customers.js"></script>
+  <script src="./js/pages/staff.js"></script>
+  <script src="./js/pages/projectTypes.js"></script>
+  <script src="./js/pages/expenses.js"></script>
+  <script src="./js/pages/invoices.js"></script>
+  <script src="./js/pages/reportProjects.js"></script>
+  <script src="./js/pages/reportStaff.js"></script>
+  <script src="./js/pages/reportMonthly.js"></script>
+  <script src="./js/pages/reportCustomers.js"></script>
+  <script src="./js/pages/estimate.js"></script>
+  <script src="./js/pages/forecast.js"></script>
+  <script src="./js/pages/settings.js"></script>
+  <script src="./js/router.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

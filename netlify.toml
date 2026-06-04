@@ -1,0 +1,11 @@
+# Netlify 設定 － frontend/ を静的公開（ビルド不要）
+[build]
+  publish = "frontend"
+  command = ""
+
+# SPA（ハッシュルーター）なのでリダイレクトは不要だが、
+# 直リンク時の保険として index.html を返す。
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

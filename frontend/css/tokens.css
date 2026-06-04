@@ -1,0 +1,40 @@
+/* ==================================================================
+ * tokens.css － デザイントークン（CSS変数）
+ * ------------------------------------------------------------------
+ * 【HYPHEN ブランド差し替えポイント】
+ *   --brand-* を変更すればロゴ周り・メインカラーが一括で変わる。
+ *   セマンティックカラー（danger/warn/success）は意味固定のため原則変更しない。
+ * ================================================================== */
+:root {
+  /* ブランド（差し替え対象） */
+  --brand-primary:   #2563eb;
+  --brand-primary-d: #1e40af;
+  --brand-accent:    #0ea5e9;
+
+  /* セマンティック（赤=警告/超過/赤字, 黄=注意, 緑=良好） */
+  --c-danger:  #dc2626;
+  --c-danger-bg:  #fee2e2;
+  --c-warn:    #d97706;
+  --c-warn-bg:    #fef3c7;
+  --c-success: #16a34a;
+  --c-success-bg: #dcfce7;
+  --c-info:    #0284c7;
+  --c-info-bg:    #e0f2fe;
+  --c-muted-bg:   #f1f5f9;
+
+  /* 背景・面・文字 */
+  --bg:        #f5f7fa;
+  --surface:   #ffffff;
+  --border:    #e2e8f0;
+  --text:      #1e293b;
+  --text-mute: #64748b;
+
+  /* レイアウト */
+  --sidebar-w: 240px;
+  --header-h:  56px;
+  --radius:    10px;
+  --radius-sm: 6px;
+  --shadow:    0 1px 3px rgba(0,0,0,.08);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.16);
+  --font: "Noto Sans JP", "Hiragino Sans", "Meiryo", system-ui, sans-serif;
+}

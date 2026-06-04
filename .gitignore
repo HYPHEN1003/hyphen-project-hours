@@ -1,0 +1,11 @@
+# clasp（scriptId 等のローカル設定。漏洩防止のため除外）
+.clasp.json
+.clasprc.json
+
+# OS / エディタ
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+.vscode/
+.idea/
