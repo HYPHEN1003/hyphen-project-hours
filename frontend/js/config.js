@@ -9,8 +9,8 @@ window.App = window.App || {};
 App.pages = App.pages || {}; // 各ページモジュールの登録先
 
 App.config = {
-  // ★ GAS デプロイ後の /exec URL をここに貼る
-  API_BASE_URL: 'https://script.google.com/macros/s/XXXXXXXXXXXXXXXXX/exec',
+  // ★ GAS デプロイ後の /exec URL（clasp create-deployment で取得）
+  API_BASE_URL: 'https://script.google.com/macros/s/AKfycbyGVD48gUwGhe5BD3q5yGgnV-YEND4AGxOA6z91SLMmUL0vqEoCPROvUNxzGarFBpu4/exec',
 
   // ブランド（差し替え可）
   APP_NAME: '案件別工数管理システム',

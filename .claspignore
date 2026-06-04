@@ -1,0 +1,5 @@
+# clasp push から除外するファイル（GASにアップロードしない）
+# node_harness.js は Node 専用（require/vm を使用）。GASに載るとロード時にエラーになるため除外。
+**/node_harness.js
+gas/tests/node_harness.js
+node_harness.js
