@@ -103,6 +103,12 @@ clasp push                          # gas/ をアップロード
 
 セマンティックカラー（赤/黄/緑）は意味固定のため原則変更しません。
 
+## 公開URL・CI/CD
+
+- 本番サイト: https://hyphen-project-hours.netlify.app
+- **自動デプロイ**: GitHub `main` への push で Netlify が自動的に再ビルド・公開します
+  （Netlify デプロイキー＋GitHub Webhook 連携済み。publish=`frontend`）。
+
 ## 動作確認チェックリスト
 
 `IMPLEMENTATION_PLAN.md` の §5 を参照。
