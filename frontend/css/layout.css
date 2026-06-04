@@ -9,52 +9,51 @@
   height: 100vh;
 }
 
-/* ヘッダ */
+/* ヘッダ（ダーク・ネイビー） */
 .app-header {
   grid-area: header;
   display: flex; align-items: center; gap: 12px;
   padding: 0 16px;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  background: var(--brand-primary);
+  color: var(--sidebar-text-strong);
   z-index: 30;
 }
-.brand { display: flex; align-items: center; gap: 8px; font-weight: 700; }
-.brand-logo { color: var(--brand-primary); font-size: 18px; }
+.brand { display: flex; align-items: center; gap: 8px; font-weight: 700; color: #fff; }
+.brand-logo { color: var(--brand-accent); font-size: 18px; }
 .brand-name { font-size: 15px; }
 .header-right { margin-left: auto; }
-.header-date { color: var(--text-mute); font-size: 13px; }
+.header-date { color: rgba(255,255,255,.82); font-size: 13px; }
 .icon-btn {
   display: none; background: none; border: none; font-size: 20px;
-  color: var(--text); width: 36px; height: 36px; border-radius: var(--radius-sm);
+  color: #fff; width: 36px; height: 36px; border-radius: var(--radius-sm);
 }
-.icon-btn:hover { background: var(--c-muted-bg); }
+.icon-btn:hover { background: var(--sidebar-hover); }
 
-/* サイドバー */
+/* サイドバー（ダーク・ネイビー） */
 .app-sidebar {
   grid-area: sidebar;
-  background: var(--surface);
-  border-right: 1px solid var(--border);
+  background: var(--sidebar-bg);
   overflow-y: auto;
   display: flex; flex-direction: column;
   z-index: 25;
 }
 #nav { flex: 1; padding: 8px 0; }
 .nav-group-title {
-  padding: 12px 16px 4px; font-size: 11px; font-weight: 700;
-  color: var(--text-mute); letter-spacing: .05em;
+  padding: 14px 16px 4px; font-size: 11px; font-weight: 700;
+  color: var(--sidebar-muted); letter-spacing: .06em;
 }
 .nav-item {
-  display: block; padding: 9px 16px 9px 24px; color: var(--text);
+  display: block; padding: 9px 16px 9px 24px; color: var(--sidebar-text);
   font-size: 13.5px; border-left: 3px solid transparent; cursor: pointer;
 }
-.nav-item:hover { background: var(--c-muted-bg); }
+.nav-item:hover { background: var(--sidebar-hover); color: #fff; }
 .nav-item.active {
-  background: var(--c-info-bg); color: var(--brand-primary-d);
-  border-left-color: var(--brand-primary); font-weight: 700;
+  background: var(--sidebar-active); color: #fff;
+  border-left-color: var(--brand-accent); font-weight: 700;
 }
 .sidebar-footer {
-  padding: 12px 16px; border-top: 1px solid var(--border);
-  font-size: 12px; color: var(--text-mute);
+  padding: 12px 16px; border-top: 1px solid var(--sidebar-divider);
+  font-size: 12px; color: var(--sidebar-muted);
 }
 .sidebar-footer .version { font-size: 11px; opacity: .8; }
 .sidebar-overlay {
