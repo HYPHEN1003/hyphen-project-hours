@@ -143,7 +143,8 @@ var ROUTES = {
   runAggregateMonthly: function (c) { return aggregateMonthly(c.payload.yearMonth || lastMonthStr_()); },
   runAggregateStaff: function (c) { return aggregateStaffMonthly(c.payload.yearMonth || lastMonthStr_()); },
   runAnalyzeEstimate: function () { return analyzeEstimateAccuracy(); },
-  runForecastCapacity: function (c) { return forecastCapacity(c.payload.yearMonth || currentMonthStr_()); }
+  runForecastCapacity: function (c) { return forecastCapacity(c.payload.yearMonth || currentMonthStr_()); },
+  runRebuildAggregates: function () { return rebuildAggregates(); }
 };
 
 /** GET/POST どちらでも検索条件を拾えるよう params と payload をマージ */

@@ -108,6 +108,34 @@ function createSheetRepository() {
     return row;
   }
 
+  /** ヘッダ列順に応じたセル書式の配列を返す。
+   *  text/date/time/datetime はプレーンテキスト('@')を強制し、
+   *  "2026-06" 等が日付に自動変換されるのを防ぐ。数値/真偽は General。 */
+  function formatsForHeaders(table) {
+    var info = headerInfo(table);
+    var keyByIndex = {};
+    info.def.columns.forEach(function (col) {
+      var idx = info.keyToIndex[col.key];
+      if (idx !== undefined) keyByIndex[idx] = col.type;
+    });
+    var fmts = [];
+    for (var i = 0; i < info.headers.length; i++) {
+      var t = keyByIndex[i];
+      fmts.push((t === 'text' || t === 'date' || t === 'time' || t === 'datetime') ? '@' : 'General');
+    }
+    return fmts;
+  }
+
+  /** 1行を「書式を強制してから」書き込む（appendRow の自動型変換を回避） */
+  function writeRowsAt(table, startRow, rows) {
+    if (!rows.length) return;
+    var sh = sheet(table);
+    var fmts = formatsForHeaders(table);
+    var range = sh.getRange(startRow, 1, rows.length, rows[0].length);
+    range.setNumberFormats(rows.map(function () { return fmts; }));
+    range.setValues(rows);
+  }
+
   /** 全データ行をエンティティ配列で取得（ヘッダ除く） */
   function readAll(table) {
     var sh = sheet(table);
@@ -210,7 +238,8 @@ function createSheetRepository() {
         e.updated_by = opts.actor || '';
       }
       var row = entityToRow(table, e);
-      sheet(table).appendRow(row);
+      var sh = sheet(table);
+      writeRowsAt(table, sh.getLastRow() + 1, [row]);
       return e;
     },
 
@@ -228,7 +257,7 @@ function createSheetRepository() {
       });
       var rows = prepared.map(function (e) { return entityToRow(table, e); });
       var sh = sheet(table);
-      sh.getRange(sh.getLastRow() + 1, 1, rows.length, rows[0].length).setValues(rows);
+      writeRowsAt(table, sh.getLastRow() + 1, rows);
       return prepared;
     },
 
@@ -255,7 +284,7 @@ function createSheetRepository() {
             merged.updated_by = opts.actor || '';
           }
           var newRow = entityToRow(table, merged);
-          sh.getRange(i + 2, 1, 1, newRow.length).setValues([newRow]);
+          writeRowsAt(table, i + 2, [newRow]);
           return merged;
         }
       }
@@ -294,7 +323,7 @@ function createSheetRepository() {
       }
       if (entities && entities.length) {
         var rows = entities.map(function (e) { return entityToRow(table, e); });
-        sh.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+        writeRowsAt(table, 2, rows);
       }
     },
 
@@ -308,11 +337,11 @@ function createSheetRepository() {
         var match = keys.every(function (k) { return String(ent[k]) === String(entity[k]); });
         if (match) {
           var newRow = entityToRow(table, entity);
-          sh.getRange(i + 2, 1, 1, newRow.length).setValues([newRow]);
+          writeRowsAt(table, i + 2, [newRow]);
           return;
         }
       }
-      sh.appendRow(entityToRow(table, entity));
+      writeRowsAt(table, sh.getLastRow() + 1, [entityToRow(table, entity)]);
     },
 
     getSetting: function (key) {

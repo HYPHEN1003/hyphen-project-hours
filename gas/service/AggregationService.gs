@@ -265,6 +265,45 @@ function forecastCapacity(yearMonth) {
   });
 }
 
+/**
+ * 全集計シートを作り直す（メンテ用）。
+ * 壊れた集計や月跨ぎのデータを一括で正しく再生成する。
+ * データのある月を自動抽出し、月次/スタッフ/顧客/案件/見積/稼働予測を全更新。
+ */
+function rebuildAggregates() {
+  var repo = getRepository();
+  // 1. 集計シートを全クリア（ロック下）
+  withLock(function () {
+    AGG_TABLES.forEach(function (t) { repo.replaceAll(t, []); });
+  });
+  // 2. データのある月を抽出
+  var months = distinctDataMonths_(repo);
+  // 3. 再集計（各関数が個別に withLock）
+  aggregateProjects({ includeAll: true });
+  analyzeEstimateAccuracy();
+  months.forEach(function (m) { aggregateMonthly(m); aggregateStaffMonthly(m); });
+  forecastCapacity(currentMonthStr_());
+  forecastCapacity(nextMonthStr_());
+  return { months: months, count: months.length };
+}
+
+/** time_entries / invoices / projects からデータのある 'YYYY-MM' を抽出 */
+function distinctDataMonths_(repo) {
+  var set = {};
+  repo.findAll('time_entries').forEach(function (e) { var m = ymOf_(e.work_date); if (m) set[m] = true; });
+  repo.findAll('invoices').forEach(function (i) { var m = ymOf_(i.invoice_date); if (m) set[m] = true; });
+  repo.findAll('expenses').forEach(function (x) { var m = ymOf_(x.expense_date); if (m) set[m] = true; });
+  // 当月は必ず含める
+  set[currentMonthStr_()] = true;
+  return Object.keys(set).sort();
+}
+
+/** 'YYYY-MM' の翌月 */
+function nextMonthStr_() {
+  var d = new Date(); d.setMonth(d.getMonth() + 1);
+  return Utilities.formatDate(d, 'Asia/Tokyo', 'yyyy-MM');
+}
+
 /* =========================================================
  *  レポート読み出し（集計シート参照のみ）
  * ========================================================= */
