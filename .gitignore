@@ -9,3 +9,6 @@ Thumbs.db
 node_modules/
 .vscode/
 .idea/
+
+# Local Netlify folder
+.netlify
